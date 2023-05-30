@@ -1,0 +1,23 @@
+extends layout
+
+block content
+    header.w3-container.w3-teal
+      h1 Registo #{item.Id}
+    ul 
+        li Número de registo: #{item['Número de Registo']}
+        li Código da rua: #{item['Código de rua']}
+        li Rua: #{item.Rua}
+        li Local: #{item.Local}
+        li Freguesia: #{item.Freguesia}
+        li Nome Científico: #{item['Nome Científico']}
+        li Origem: #{item.Origem} 
+        li Data de Plantação: #{item['Data de Plantação']}
+        li Estado: #{item.Estado} 
+        li Caldeira: #{item.Caldeira} 
+        li Tutor: #{item.Tutor}
+        li Implantação #{item.Implantação}
+        li Gestor: #{item.Gestor}
+        li Data de actualização: #{item['Data de actualização']}
+        li Número de intervenções: #{item['Número de intervenções']}
+
+    a(href="/") Voltar

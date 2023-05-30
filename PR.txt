@@ -1,0 +1,125 @@
+Exercício 1
+
+1.1 Setup
+
+Para importar os dados para a base de dados em MongoDB foi usado o comando:
+
+    $ mongoimport -d plantas -c plantas --file plantas.json --jsonArray
+
+Para testar se a importação correu bem, foi utilizados os comandos: 
+
+    $ mongosh
+    $ use plantas
+    $ db.plantas.find()
+
+A persitência de dados é assegurada pela base de dados
+
+1.2 Queries
+
+1.
+
+Comando: db.plantas.countDocuments()
+Resultado: 29617
+
+2. 
+
+Comando: db.plantas.countDocuments({"Freguesia":"São Domingos de Rana"})
+Resultado 5903
+
+3.
+
+Comando: db.plantas.distinct("Freguesia").sort()
+Resultado: 
+
+[
+  '',
+  'Abóboda',
+  'Alcabideche',
+  'São Domingos de Rana',
+  'U.F. Carcavelos e Parede',
+  'U.F. Cascais e Estoril'
+]
+
+4. 
+
+Comando:
+
+db.plantas.aggregate([
+  { $group: { _id: "$Freguesia", total: { $sum: 1 } } }
+]);
+
+Resultado: 
+
+[
+  { _id: '', total: 26 },
+  { _id: 'Abóboda', total: 2 },
+  { _id: 'Alcabideche', total: 4034 },
+  { _id: 'São Domingos de Rana', total: 5903 },
+  { _id: 'U.F. Cascais e Estoril', total: 12023 },
+  { _id: 'U.F. Carcavelos e Parede', total: 7629 }
+]
+
+5.
+
+Comando:
+
+db.plantas.aggregate([
+  { $group: { _id: "$Espécie", total: { $sum: 1 } } }
+]);
+
+Resultado:
+
+[
+  { _id: 'araucaria do chile', total: 46 },
+  { _id: 'zelha', total: 8 },
+  { _id: 'aroeira vermelha', total: 17 },
+  { _id: 'borracheira', total: 93 },
+  { _id: 'sophora pyramidalis', total: 19 },
+  { _id: 'sobreiro', total: 21 },
+  { _id: 'bambu', total: 1 },
+  { _id: 'amieiro', total: 35 },
+  { _id: 'abacateiro', total: 25 },
+  { _id: 'chorisia', total: 13 },
+  { _id: 'planta do natal', total: 2 },
+  { _id: 'Lodão americano', total: 1 },
+  { _id: 'trombeteiro', total: 1 },
+  { _id: 'Hibisco', total: 3 },
+  { _id: 'cedro', total: 5 },
+  { _id: 'ameixoeira de jardim', total: 1015 },
+  { _id: 'balão de s. joão', total: 129 },
+  { _id: 'catalpa', total: 91 },
+  { _id: 'ligustro', total: 429 },
+  { _id: 'aveleira', total: 1 }
+]
+
+1.3 e 2
+
+Para fazer o setup do ex1 foi utilizados os comandos:
+
+    $ npx express-generator --view=pug
+    $ npm install
+    $ npm audit fix --force
+    $ npm audit fix --force
+    $ npm install mongoose
+
+E para correr o projeto:
+
+    $ npm start
+
+Para testar as queries foi utilizada a extensão "Thunder Client" do VSCode
+
+Para o ex2, o processo de setup foi idêntico sem o "mongoose" e com a inclusão de:
+
+    $ npm install axios
+
+Como executar a app:
+
+    Primeiro, deve ser executada a API na pasta ex1:
+
+        $ npm install
+        $ npm start
+
+    De seguida, deve ser executada a Interface na pasta ex2:
+
+        $ npm install
+        $ npm start
